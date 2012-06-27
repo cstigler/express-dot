@@ -50,5 +50,4 @@ exports.__express = function(filename, options, cb) {
 
       return renderWithLayout(layoutTemplate, options, cb);
     });
-  }
 };
