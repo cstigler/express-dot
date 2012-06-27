@@ -1,0 +1,28 @@
+{
+  "name": "express-dot",
+  "description": "doT stub for Express 3.x with caching and layout support",
+  "keywords": [
+    "template",
+    "templating",
+    "express",
+    "doT",
+    "fast",
+    "caching",
+    "engine"
+  ],
+  "version": "0.0.1",
+  "main": "express-dot.js",
+  "homepage": "http://github.com/cstigler/express-dot",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cstigler/express-dot.git"
+  },
+  "author": {
+    "name": "Charlie Stigler",
+    "email": "charlie@charliestigler.com"
+  },
+  "engines": [
+    "node >=0.2.6"
+  ],
+  "_id": "express-dot@0.0.1"
+}
