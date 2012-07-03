@@ -13,7 +13,8 @@
   "version": "0.0.2",
   "main": "express-dot.js",
   "dependencies": {
-    "dot": ">= 0.2.6"
+    "dot": ">= 0.2.6",
+    "async": ">= 0.1.22"
   },
   "homepage": "http://github.com/cstigler/express-dot",
   "repository": {
