@@ -8,14 +8,14 @@ var _globals = {};
 
 function _renderFile(filename, options, cb) {
   'use strict';
-  cb = (typeof cb === 'function') ? cb : function () {};
+  cb = (typeof cb === 'function') ? cb : function() {};
 
   var template = _cache[filename];
   if (template) {
     return cb(null, template.call(_globals, options));
   }
 
-  return fs.readFile(filename, 'utf8', function (err, str) {
+  return fs.readFile(filename, 'utf8', function(err, str) {
     if (err) return cb(err);
 
     var template = doT.template(str, null, _globals);
@@ -26,9 +26,9 @@ function _renderFile(filename, options, cb) {
 
 function _renderWithLayout(filename, layoutTemplate, options, cb) {
   'use strict';
-  cb = (typeof cb === 'function') ? cb : function () {};
+  cb = (typeof cb === 'function') ? cb : function() {};
 
-  return _renderFile(filename, options, function (err, str) {
+  return _renderFile(filename, options, function(err, str) {
     if (err) return cb(err);
     options.body = str;
     return cb(null, layoutTemplate.call(_globals, options));
@@ -41,24 +41,24 @@ exports.setGlobals = function(globals) {
 };
 
 exports.__express = function(filename, options, cb) {
-    'use strict';
-    cb = (typeof cb === 'function') ? cb : function () {};
-    var extension = path.extname(filename);
+  'use strict';
+  cb = (typeof cb === 'function') ? cb : function() {};
+  var extension = path.extname(filename);
 
-    if (options.layout !== undefined && !options.layout) return _renderFile(filename, options, cb);
+  if (options.layout !== undefined && !options.layout) return _renderFile(filename, options, cb);
 
-    var viewDir = options.settings.views;
-    var layoutFileName = path.join(viewDir, options.layout || 'layout' + extension);
+  var viewDir = options.settings.views;
+  var layoutFileName = path.join(viewDir, options.layout || 'layout' + extension);
 
-    var layoutTemplate = _cache[layoutFileName];
-    if (layoutTemplate) return _renderWithLayout(filename, layoutTemplate, options, cb);
+  var layoutTemplate = _cache[layoutFileName];
+  if (layoutTemplate) return _renderWithLayout(filename, layoutTemplate, options, cb);
 
-    return fs.readFile(layoutFileName, 'utf8', function (err, str) {
-      if (err) return cb(err);
+  return fs.readFile(layoutFileName, 'utf8', function(err, str) {
+    if (err) return cb(err);
 
-      var layoutTemplate = doT.template(str, null, _globals);
-      if (options.cache) _cache[layoutFileName] = layoutTemplate;
+    var layoutTemplate = doT.template(str, null, _globals);
+    if (options.cache) _cache[layoutFileName] = layoutTemplate;
 
-      return _renderWithLayout(filename, layoutTemplate, options, cb);
-    });
+    return _renderWithLayout(filename, layoutTemplate, options, cb);
+  });
 };
