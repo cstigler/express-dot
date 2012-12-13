@@ -11,9 +11,12 @@ Install original repository
 npm install express-dot
 ```
 
+or you can use my fork on github
 
-or you can use my fork repository on github;
-
+```
+$ npm install https://www.github.com/daraser/express-dot/tarball/master
+```
+Warnning not tested yet
 
 ##Setup
 
