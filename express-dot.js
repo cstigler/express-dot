@@ -2,24 +2,25 @@ var fs = require('fs');
 var path = require('path');
 var doT = require('dot');
 var async = require('async');
+var path = require('path'); 
 
 var _cache = {};
 var _partialsCache = {};
 var _globals = {
-    load : function(path) {
+    load : function(file) {
         var template = null;
         // let's try loading content from cache
         if(_globals.partialCache == true)
-            template = _partialsCache[path];
+            template = _partialsCache[file];
          
         // no content so let's load from file system 
         if(template == null){
-          template == fs.readFileSync(process.argv[1].replace(/\/[^\/]*$/, path)); 
+          template == fs.readFileSync(path.join(path.dirname(process.argv[1]), file)); 
         }
         
         // let's cache the partial  
         if(_globals.partialCache == true)
-            _partialsCache[key] = template;
+            _partialsCache[file] = template;
         
         return template;
   	} 
