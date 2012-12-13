@@ -1,18 +1,23 @@
 express3-dot
 ============
 
-doT stub for Express 3.x with caching and layout support
+doT stub for Express 3.x with caching and layout support. This an edited version with patial loading support.
 
-Install
-============
+##Install
 
+Install original reppo
+
+```
 npm install express-dot
+```
 
-or you can use my fork on github;
+
+or you can use my fork repository on github;
 
 
-Setup
-============
+##Setup
+
+```
 
 // load express doT
 var doT = require('express-dot');
@@ -42,4 +47,5 @@ app.get('/', function(req, res){
   res.render('index', { });
 })
 
+```
 
