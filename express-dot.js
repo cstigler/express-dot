@@ -14,6 +14,7 @@ var _globals = {
             template = _partialsCache[file];
          
         // no content so let's load from file system 
+        console.log(path.join(path.dirname(process.argv[1]), file));
         if(template == null){
           template == fs.readFileSync(path.join(path.dirname(process.argv[1]), file)); 
         }
