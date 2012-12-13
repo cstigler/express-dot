@@ -15,7 +15,7 @@ var _globals = {
          
         // no content so let's load from file system 
         if(template == null){
-        consoloe.log( fs.readFileSync(path.join(path.dirname(process.argv[1]), file)));
+        console.log( fs.readFileSync(path.join(path.dirname(process.argv[1]), file)));
           template == fs.readFileSync(path.join(path.dirname(process.argv[1]), file)); 
         }
         
