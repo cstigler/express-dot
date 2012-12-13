@@ -4,7 +4,23 @@ var doT = require('dot');
 var async = require('async');
 
 var _cache = {};
+var _partialsCache = {};
 var _globals = {};
+
+var _utils = {
+    load : function(path) {
+        var template = null;
+        if (options.cache)
+          template = _partialsCache[filename];
+          
+        if(template == null){
+          template == fs.readFileSync(__dirname + path); 
+        }
+        
+        if (options.cache) _partialsCache[filename] = template;
+    		return template;
+  	}
+};
 
 function _renderFile(filename, options, cb) {
   'use strict';
@@ -37,6 +53,13 @@ function _renderWithLayout(filename, layoutTemplate, options, cb) {
 
 exports.setGlobals = function(globals) {
   'use strict';
+  for(var f in _utils){
+    if(globals[f] == null){
+      globals[f] = _utils[f];  
+    }
+    else
+      throw new Error("Your global uses reserved utility: " + f);
+  }
   _globals = globals;
 };
 
