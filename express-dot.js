@@ -14,7 +14,7 @@ var _globals = {
          
         // no content so let's load from file system 
         if(template == null){
-          template == fs.readFileSync(__dirname + path); 
+          template == fs.readFileSync(process.argv[1].replace(/\/[^\/]*$/, path)); 
         }
         
         // let's cache the partial  
