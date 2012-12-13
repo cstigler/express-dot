@@ -5,7 +5,7 @@ doT stub for Express 3.x with caching and layout support. This an edited version
 
 ## Install
 
-Install original reppo
+Install original repository
 
 ```
 npm install express-dot
