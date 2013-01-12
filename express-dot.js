@@ -2,9 +2,29 @@ var fs = require('fs');
 var path = require('path');
 var doT = require('dot');
 var async = require('async');
+var path = require('path'); 
 
 var _cache = {};
-var _globals = {};
+var _partialsCache = {};
+var _globals = {
+    load : function(file) {
+        var template = null;
+        // let's try loading content from cache
+        if(_globals.partialCache == true)
+            template = _partialsCache[file];
+         
+        // no content so let's load from file system 
+        if(template == null){
+          template = fs.readFileSync(path.join(path.dirname(process.argv[1]), file)); 
+        }
+        
+        // let's cache the partial  
+        if(_globals.partialCache == true)
+            _partialsCache[file] = template;
+        
+        return template;
+  	} 
+};
 
 function _renderFile(filename, options, cb) {
   'use strict';
@@ -37,6 +57,13 @@ function _renderWithLayout(filename, layoutTemplate, options, cb) {
 
 exports.setGlobals = function(globals) {
   'use strict';
+  for(var f in _globals){
+    if(globals[f] == null){
+      globals[f] = _globals[f];  
+    }
+    else
+      throw new Error("Your global uses reserved utility: " + f);
+  }
   _globals = globals;
 };
 
