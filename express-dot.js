@@ -1,7 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 var doT = require('dot');
-var async = require('async');
 var path = require('path'); 
 
 var _cache = {};
@@ -37,8 +36,17 @@ function _renderFile(filename, options, cb) {
 
   return fs.readFile(filename, 'utf8', function(err, str) {
     if (err) return cb(err);
-
-    var template = doT.template(str, null, _globals);
+    
+    var extension = path.extname(filename);
+    var template;
+    if(extension === '.html') {
+      template = function () {
+        return str;
+      };
+    } else {
+      template = doT.template(str, null, _globals);
+    }
+    
     if (options.cache) _cache[filename] = template;
     return cb(null, template.call(_globals, options));
   });
