@@ -89,3 +89,7 @@ exports.__express = function(filename, options, cb) {
     return _renderWithLayout(filename, layoutTemplate, options, cb);
   });
 };
+
+exports.setTemplateSettings = function(settings) {
+	doT.templateSettings = settings;
+};
