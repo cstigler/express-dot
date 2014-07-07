@@ -72,10 +72,11 @@ exports.__express = function(filename, options, cb) {
   cb = (typeof cb === 'function') ? cb : function() {};
   var extension = path.extname(filename);
 
-  if (options.layout !== undefined && !options.layout) return _renderFile(filename, options, cb);
+  var layout = options.layout || (options.settings['view options'] && options.settings['view options'].layout);
+  if (layout !== undefined && !layout) return _renderFile(filename, options, cb);
 
   var viewDir = options.settings.views;
-  var layoutFileName = path.join(viewDir, options.layout || 'layout' + extension);
+  var layoutFileName = path.join(viewDir, layout || 'layout' + extension);
 
   var layoutTemplate = _cache[layoutFileName];
   if (layoutTemplate) return _renderWithLayout(filename, layoutTemplate, options, cb);
